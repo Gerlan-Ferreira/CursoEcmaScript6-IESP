@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <meta http-equiv="Content-Type" content="text/html;charset=UTF-8">
+    <title>Curso ES6</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+        integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+</head>
+
+<body>
+
+    <div class="container col-lg-3">
+        <form id="formulario" autocomplete="off">
+            <h1 class="h3 mb-3 font-weight-normal">Login ES6</h1>
+            <div class="form-group">
+                <label for="login"> E-mail </label>
+                <input type="email" class="form-control" id="login" placeholder="E-mail">
+            </div>
+            <div class="form-group">
+                <label for="senha">Senha</label>
+                <input type="password" class="form-control" id="senha" placeholder="Senha">
+            </div>
+
+            <div id="erro"></div>
+
+            <button type="button" class="btn btn-success" id="botaoEntrar"> Entrar </button>
+
+        </form>
+    </div>
+
+</body>
+
+<script>
+
+    const botaoEntrar = document.querySelector('#botaoEntrar');
+    const inputLogin = document.querySelector('#login');
+    const inputSenha = document.querySelector('#senha');
+    const errorDiv = document.querySelector('#erro');
+    const correctPage = document.querySelector('.container');
+
+    let loginObject = {
+
+        login: '',
+        senha: ''
+
+    };
+    const validaLogin = {
+        login: 'gerlan',
+        senha: '123'
+    };
+
+    const error = `
+        <div class = "alert alert-danger" role="alert">
+            Login ou senha inválidos 
+        </div>
+    `
+    const correct = `
+
+        <h1 class="h3 mb-3 font-weight-normal">Bem vindo, ${validaLogin.login + '!'}</h1>
+            
+        
+    `
+    const alerta = `
+
+        <div class = "alert alert-warning" role="alert">
+            Login ou senha não preenchidos 
+        </div>
+    `
+    botaoEntrar.onclick = function () {
+        loginObject.login = inputLogin.value;
+        loginObject.senha = inputSenha.value;
+        errorDiv.innerHTML = "";
+        botaoEntrar.innerHTML = 'Carregando...';
+        botaoEntrar.disabled = true;
+        setTimeout(function () {
+            if (loginObject.login == validaLogin.login && loginObject.senha == validaLogin.senha) {
+                correctPage.innerHTML = correct;
+            } else if (loginObject.login == "" || loginObject.senha == "") {
+                errorDiv.innerHTML = alerta;
+            } else {
+                errorDiv.innerHTML = error;
+            }
+            botaoEntrar.innerHTML = 'Entrar';
+            botaoEntrar.disabled = false;
+        }, 1000);
+    }
+</script>
+
+</html>
